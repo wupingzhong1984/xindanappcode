@@ -27,6 +27,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [NSThread sleepForTimeInterval:2.0];
     //test
+    //test2
     [APService setBadge:0];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     [APService clearAllLocalNotifications];
