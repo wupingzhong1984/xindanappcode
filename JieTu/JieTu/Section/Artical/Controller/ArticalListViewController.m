@@ -12,6 +12,7 @@
 #import "MJRefresh.h"
 #import "ArticalModel.h"
 #import "LoginViewController.h"
+#import "MainNavigationController.h"
 
 @interface ArticalListViewController ()<UITableViewDataSource, UITableViewDelegate>
 @property(nonatomic, strong)UITableView * tableView;
@@ -46,14 +47,17 @@
     label.font = [UIFont systemFontOfSize:18];
     self.navigationItem.titleView = label;
     //用户安装了微信，可以去登陆页面，没有安装，隐藏。
-    if ([WXApi isWXAppInstalled]) {
-        
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"center.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemAction)];
-    }
-
+    //use menu instead of login
+//    if ([WXApi isWXAppInstalled]) {
+//        
+//        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"center.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemAction)];
+//    }
     
-    
-    
+    //menu bar
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:(MainNavigationController *)self.navigationController
+                                                                            action:@selector(showMenu)];
     self.pageNo = 1;
     [self creatTableView];
 }

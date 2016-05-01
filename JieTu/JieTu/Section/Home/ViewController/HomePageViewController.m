@@ -16,6 +16,7 @@
 #import "HomeCollectionViewCell.h"
 #import "ModifyView.h"
 #import "DataBase.h"
+#import "MainNavigationController.h"
 
 @interface HomePageViewController ()<UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UINavigationControllerDelegate>
 //@property(nonatomic, strong)UITableView * tableView;
@@ -308,11 +309,19 @@
     self.navigationItem.titleView = label;
     
     //用户安装了微信，可以去登陆页面，没有安装，隐藏。
-    if ([WXApi isWXAppInstalled]) {
-        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"center.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemAction)];
-        
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"add.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemAction)];
-    }
+    //use menu instead of login
+//    if ([WXApi isWXAppInstalled]) {
+//        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"center.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemAction)];
+//        
+//    }
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:(MainNavigationController *)self.navigationController
+                                                                            action:@selector(showMenu)];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"add.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemAction)];
+    
     self.cancelShopKind = @"0";
     [self creatCollection];
     [self requestData];

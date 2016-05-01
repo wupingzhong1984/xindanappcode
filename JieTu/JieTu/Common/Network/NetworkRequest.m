@@ -334,7 +334,8 @@ static char kAFImageRequestOperationObjectKey;
     return [requestUrl md5];
 }
 
-- (NSMutableDictionary *)retrieveJsonWithURLRequest:(NSString *)urlString parameters:(NSMutableDictionary *)parameters
+- (NSMutableDictionary *)retrieveJsonWithURLRequest:(NSString *)urlString
+                                         parameters:(NSMutableDictionary *)parameters
                                             success:(void (^)(NSDictionary *json))success
                                             failure:(void (^)(NSError *error))failure
 {
@@ -344,7 +345,8 @@ static char kAFImageRequestOperationObjectKey;
     return [self retrieveJsonWithURLRequest:urlString parameters:parameters needCache:needCache success:success failure:failure];
 }
 
-- (NSMutableDictionary *)retrieveJsonWithURLRequest:(NSString *)urlString parameters:(NSMutableDictionary *)parameters
+- (NSMutableDictionary *)retrieveJsonWithURLRequest:(NSString *)urlString
+                                         parameters:(NSMutableDictionary *)parameters
                                           needCache:(BOOL)needCache
                          success:(void (^)(NSDictionary *json))success
                          failure:(void (^)(NSError *error))failure
@@ -390,7 +392,7 @@ static char kAFImageRequestOperationObjectKey;
                             [CherryHelper alert:@"无法连接服务器"];
                     }
                     
-                    networkReachable = NO;
+//                    networkReachable = NO;
                     
                     if (failure)
 //                        success(json);
@@ -401,7 +403,8 @@ static char kAFImageRequestOperationObjectKey;
     return json;
 }
 
-- (NSMutableDictionary *)retrieveJsonWithJSONRequest:(NSString *)urlString parameters:(NSMutableDictionary *)parameters
+- (NSMutableDictionary *)retrieveJsonWithJSONRequest:(NSString *)urlString
+                                          parameters:(NSMutableDictionary *)parameters
                                              success:(void (^)(NSDictionary *json))success
                                              failure:(void (^)(NSError *error))failure
 {
@@ -474,7 +477,7 @@ static char kAFImageRequestOperationObjectKey;
                  [CherryHelper alert:@"无法连接服务器"];
          }
          
-         networkReachable = NO;
+//         networkReachable = NO;
          
          if (failure){
 //             if ([[parameters objectForKey:@"requestType"] isEqualToString:HomePageGetImageListType]||[[parameters objectForKey:@"requestType"] isEqualToString:AidingApplyedListType] ||[[parameters objectForKey:@"requestType"] isEqualToString:GetProductDetailInfo]||[[parameters objectForKey:@"requestType"] isEqualToString:MyCarInfoType]) {

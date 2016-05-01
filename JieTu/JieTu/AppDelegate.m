@@ -13,6 +13,9 @@
 #import "APService.h"
 #import "CustomTabbarController.h"
 #import "ArticalListViewController.h"
+#import "MainNavigationController.h"
+#import "LeftMenuViewController.h"
+#import "REFrostedViewController.h"
 
 
 @interface AppDelegate ()<UIScrollViewDelegate>
@@ -31,7 +34,9 @@
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     [APService clearAllLocalNotifications];
 
+    [self getIntoHomePageController];
     [self.window makeKeyAndVisible];
+    [self initFirstComeIn];
     
     [UMSocialData setAppKey:@"5630dfe267e58e25200005a7"];
     [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ,UMShareToQzone,UMShareToWechatSession,UMShareToWechatTimeline]];
@@ -68,8 +73,6 @@
     
     //测试结束
     
-    [self getIntoHomePageController];
-     [self initFirstComeIn];
     return YES;
 }
 
@@ -167,15 +170,28 @@
 
 - (void)getIntoHomePageController{
 
-    HomePageViewController * homeVC = [[HomePageViewController alloc] init];
-    UINavigationController * nav1 = [[UINavigationController alloc] initWithRootViewController:homeVC];
+    MainNavigationController *navigationController = [[MainNavigationController alloc] initWithRootViewController:[[ArticalListViewController alloc] init]];
+    LeftMenuViewController *menuController = [[LeftMenuViewController alloc] initWithStyle:UITableViewStylePlain];
     
-    ArticalListViewController * articalListVC = [[ArticalListViewController alloc] init];
-    UINavigationController * nav2 = [[UINavigationController alloc] initWithRootViewController:articalListVC];
-
-    CustomTabbarController * tabbar = [[CustomTabbarController alloc] init];
-    tabbar.viewControllers = @[nav2, nav1];
-    self.window.rootViewController = tabbar;
+    // Create frosted view controller
+    //
+    REFrostedViewController *frostedViewController = [[REFrostedViewController alloc] initWithContentViewController:navigationController menuViewController:menuController];
+    frostedViewController.direction = REFrostedViewControllerDirectionLeft;
+    frostedViewController.liveBlurBackgroundStyle = REFrostedViewControllerLiveBackgroundStyleLight;
+    
+    // Make it a root controller
+    //
+    self.window.rootViewController = frostedViewController;
+    
+//    HomePageViewController * homeVC = [[HomePageViewController alloc] init];
+//    UINavigationController * nav1 = [[UINavigationController alloc] initWithRootViewController:homeVC];
+//    
+//    ArticalListViewController * articalListVC = [[ArticalListViewController alloc] init];
+//    UINavigationController * nav2 = [[UINavigationController alloc] initWithRootViewController:articalListVC];
+//
+//    CustomTabbarController * tabbar = [[CustomTabbarController alloc] init];
+//    tabbar.viewControllers = @[nav2, nav1];
+//    self.window.rootViewController = tabbar;
     
 }
 
