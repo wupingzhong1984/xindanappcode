@@ -9,18 +9,30 @@
 #import "LeftMenuViewController.h"
 #import "UIViewController+REFrostedViewController.h"
 #import "ArticalListViewController.h"
-#import "HomePageViewController.h"
+//#import "HomePageViewController.h"
+#import "PersonalCentreViewController.h"
+#import "ShopKindModel.h"
+#import "DetailViewController.h"
 
 @interface LeftMenuViewController () <UITableViewDataSource, UITableViewDelegate>
+
+//user view's subviews
+@property(nonatomic, strong)UIImageView * userFaceImgV;
+@property(nonatomic, strong)UILabel * userNameLbl;
 @property (nonatomic,strong) NSIndexPath *selectedIndex;
+@property (nonatomic,assign) BOOL didLogin;
+@property(nonatomic, strong)NSMutableArray * shopKindList;
 @end
 
 @implementation LeftMenuViewController
 
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.selectedIndex = [NSIndexPath indexPathForRow:0 inSection:0];
     
     self.tableView.separatorColor = [UIColor colorWithRed:150/255.0f green:161/255.0f blue:177/255.0f alpha:1.0f];
     self.tableView.delegate = self;
@@ -28,30 +40,140 @@
     self.tableView.opaque = NO;
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.tableHeaderView = ({
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 184.0f)];
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, 100, 100)];
-        imageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-        imageView.image = [UIImage imageNamed:@"avatar.jpg"];
-        imageView.layer.masksToBounds = YES;
-        imageView.layer.cornerRadius = 50.0;
-        imageView.layer.borderColor = [UIColor whiteColor].CGColor;
-        imageView.layer.borderWidth = 3.0f;
-        imageView.layer.rasterizationScale = [UIScreen mainScreen].scale;
-        imageView.layer.shouldRasterize = YES;
-        imageView.clipsToBounds = YES;
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 189.0f)];
+        self.userFaceImgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, 100, 100)];
+        _userFaceImgV.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+        _userFaceImgV.image = [UIImage imageNamed:@"photo.png"]; //wechat
+        _userFaceImgV.layer.masksToBounds = YES;
+        _userFaceImgV.layer.cornerRadius = 50.0;
+        _userFaceImgV.layer.borderColor = [UIColor whiteColor].CGColor;
+        _userFaceImgV.layer.borderWidth = 3.0f;
+        _userFaceImgV.layer.rasterizationScale = [UIScreen mainScreen].scale;
+        _userFaceImgV.layer.shouldRasterize = YES;
+        _userFaceImgV.clipsToBounds = YES;
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, 0, 24)];
-        label.text = @"Roman Efimov";
-        label.font = [UIFont fontWithName:@"HelveticaNeue" size:21];
-        label.backgroundColor = [UIColor clearColor];
-        label.textColor = [UIColor colorWithRed:62/255.0f green:68/255.0f blue:75/255.0f alpha:1.0f];
-        [label sizeToFit];
-        label.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+        self.userNameLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, 0, 24)];
+        _userNameLbl.text = @"游客";  //wechat
+        _userNameLbl.font = [UIFont fontWithName:@"HelveticaNeue" size:17];
+        _userNameLbl.backgroundColor = [UIColor whiteColor];
+        _userNameLbl.textColor = UIColor_alert;
+        [_userNameLbl sizeToFit];
+        _userNameLbl.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         
-        [view addSubview:imageView];
-        [view addSubview:label];
+        [view addSubview:_userFaceImgV];
+        [view addSubview:_userNameLbl];
+        
+//        UIButton *touchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        touchBtn.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 184.0f);
+//        [touchBtn addTarget:self action:@selector(touchUserView) forControlEvents:UIControlEventTouchUpInside];
+//        [view addSubview:touchBtn];
+        
         view;
     });
+    self.tableView.tableFooterView = [UIView new];
+    
+    [self initShopKindList];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"updateIndexPath" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateCurrentIndexPath:) name:@"updateIndexPath" object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    if ([self userDidLogin] && !_didLogin) {
+        //update tableheaderview
+        NSMutableDictionary * dic = [[NSUserDefaults standardUserDefaults] objectForKey:@"userInfoDic"];
+        NSString *userName = [dic objectForKey:@"userName"];
+        NSString *userIcon = [dic objectForKey:@"userIcon"];
+        
+        if (userIcon.length > 0)
+            [self.userFaceImgV sd_setImageWithURL:[NSURL URLWithString:userIcon] placeholderImage:nil];
+        if (userName.length > 0)
+            self.userNameLbl.text = userName;
+        
+        _didLogin = YES;
+    }
+    
+    if (![self userDidLogin] && _didLogin) {
+        //update tableheaderview
+        self.userFaceImgV.image = [UIImage imageNamed:@"photo.png"];;
+        self.userNameLbl.text = @"游客";
+        
+        _didLogin = NO;
+    }
+}
+
+-(void)viewDidLayoutSubviews
+{
+    //分割线顶到最左
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
+    }
+    
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0,0,0,0)];
+    }
+}
+
+- (BOOL)userDidLogin {
+    
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"userInfoDic"];
+}
+
+- (void)touchUserView {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:2];
+    [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+}
+
+- (void)initShopKindList {
+    
+    if (!_shopKindList) {
+        self.shopKindList = [NSMutableArray arrayWithCapacity:1];
+    }
+    
+    ShopKindModel *coffee = [[ShopKindModel alloc] init];
+    coffee.shopKindId = @"COFFEE";
+    coffee.shopKindName = @"咖啡";
+    coffee.img = @"coffee.png";
+    [_shopKindList addObject:coffee];
+    
+    ShopKindModel *japan = [[ShopKindModel alloc] init];
+    japan.shopKindId = @"JAPAN";
+    japan.shopKindName = @"日料";
+    japan.img = @"japanse.png";
+    [_shopKindList addObject:japan];
+    
+    ShopKindModel *night = [[ShopKindModel alloc] init];
+    night.shopKindId = @"NIGHT";
+    night.shopKindName = @"夜生活";
+    night.img = @"nightLift.png";
+    [_shopKindList addObject:night];
+    
+    ShopKindModel *chinese = [[ShopKindModel alloc] init];
+    chinese.shopKindId = @"CHINESE";
+    chinese.shopKindName = @"中餐";
+    chinese.img = @"middleFood.png";
+    [_shopKindList addObject:chinese];
+    
+    ShopKindModel *brunch = [[ShopKindModel alloc] init];
+    brunch.shopKindId = @"BRUNCH";
+    brunch.shopKindName = @"早午餐";
+    brunch.img = @"lunch.png";
+    [_shopKindList addObject:brunch];
+    
+    ShopKindModel *western = [[ShopKindModel alloc] init];
+    western.shopKindId = @"WESTERN";
+    western.shopKindName = @"西餐";
+    western.img = @"westFood.png";
+    [_shopKindList addObject:western];
+}
+
+- (void)updateCurrentIndexPath:(NSNotification *)aNotification {
+    
+    NSDictionary *userInfo = aNotification.userInfo;
+    self.selectedIndex = [userInfo objectForKey:@"indexpath"];
 }
 
 #pragma mark -
@@ -59,9 +181,18 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.backgroundColor = [UIColor clearColor];
-    cell.textLabel.textColor = [UIColor colorWithRed:62/255.0f green:68/255.0f blue:75/255.0f alpha:1.0f];
+    cell.backgroundColor = [UIColor whiteColor];
+    cell.textLabel.textColor = UIColor_alert;
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:17];
+    
+    //分割线顶到最左
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)sectionIndex
@@ -71,7 +202,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)sectionIndex
 {
-    return 0;
+    return (sectionIndex > 0)?10:0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -83,18 +214,23 @@
         return;
     }
     
-    if (indexPath.section == 0 && indexPath.row == 0) {
+    if (indexPath.section == 0) { //artical
+        
         ArticalListViewController *articalVC = [[ArticalListViewController alloc] init];
         navigationController.viewControllers = @[articalVC];
-//        if ([articalVC respondsToSelector:@selector(requestData)]) {
-//            [articalVC performSelector:@selector(requestData)];
-//        }
-    } else {
-        HomePageViewController *homeVC = [[HomePageViewController alloc] init];
-        navigationController.viewControllers = @[homeVC];
-//        if ([homeVC respondsToSelector:@selector(requestData)]) {
-//            [homeVC performSelector:@selector(requestData)];
-//        }
+
+    } else if (indexPath.section == 2) { //personcentre
+        
+        PersonalCentreViewController *personVC = [[PersonalCentreViewController alloc] init];
+        navigationController.viewControllers = @[personVC];
+        
+    } else if (indexPath.section == 1) {
+        
+        ShopKindModel *kind = [self.shopKindList objectAtIndex:indexPath.row];
+        DetailViewController * detailVC = [[DetailViewController alloc] init];
+        detailVC.shopKindModel = kind;
+        detailVC.hidesBottomBarWhenPushed = YES;
+        navigationController.viewControllers = @[detailVC];
     }
     self.selectedIndex = indexPath;
     [self.frostedViewController hideMenuViewController];
@@ -110,12 +246,20 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3; //artical + food type + person centre
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
-    return 3;
+    switch (sectionIndex) {
+        case 0:
+            return 1;//artical
+        case 1:
+            return 6;//food type 6
+        default:
+            return 1;//person centre
+    }
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -129,13 +273,13 @@
     }
     
     if (indexPath.section == 0) {
-        NSArray *titles = @[@"Home", @"Profile", @"Chats"];
-        cell.textLabel.text = titles[indexPath.row];
+        cell.textLabel.text = @"每日推荐";
+    } else if (indexPath.section == 2) {
+        cell.textLabel.text = @"个人中心";
     } else {
-        NSArray *titles = @[@"John Appleseed", @"John Doe", @"Test User"];
-        cell.textLabel.text = titles[indexPath.row];
+        NSArray *titles = [NSArray arrayWithObjects:ShopKindNames];
+        cell.textLabel.text = [NSString stringWithFormat:@"#%@",titles[indexPath.row]];
     }
-    
     return cell;
 }
 

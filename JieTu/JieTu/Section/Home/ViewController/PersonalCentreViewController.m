@@ -6,12 +6,13 @@
 //  Copyright (c) 2015年 meself. All rights reserved.
 //
 
-#import "LoginViewController.h"
+#import "PersonalCentreViewController.h"
 #import "UMSocial.h"
 #import "UIImageView+WebCache.h"
 #import "HomePageViewController.h"
+#import "MainNavigationController.h"
 
-@interface LoginViewController ()
+@interface PersonalCentreViewController ()
 
 
 @property(nonatomic, strong)UIImageView * imageView;
@@ -28,7 +29,7 @@
 @property(nonatomic, strong)NSString * userIcon;
 @end
 
-@implementation LoginViewController
+@implementation PersonalCentreViewController
 
 
 - (void)leftBarButtonItemAction{
@@ -51,13 +52,18 @@
     label.font = [UIFont systemFontOfSize:18];
     self.navigationItem.titleView = label;
 
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemAction)];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemAction)];
+    //menu bar
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu"
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:(MainNavigationController *)self.navigationController
+                                                                            action:@selector(showMenu)];
     
     [self creatSubViews];
     [self creatAfterLoginSubViews];
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userInfoDic"]) {
-        [self userhaveLogin];
+        [self reloadUserViewAfterLogin];
     }
 }
 
@@ -275,7 +281,7 @@
 }
 
 
-- (void)userhaveLogin{
+- (void)reloadUserViewAfterLogin{
     
     NSMutableDictionary * dic = [[NSUserDefaults standardUserDefaults] objectForKey:@"userInfoDic"];
     self.userId = [dic objectForKey:@"userId"];

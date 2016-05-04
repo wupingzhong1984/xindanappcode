@@ -112,7 +112,7 @@
 		8B7AA8AD1BDBF0F8000D0F49 /* wechat_normal@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B7AA8891BDBF0F8000D0F49 /* wechat_normal@3x.png */; };
 		8B7AA8AE1BDBF0F8000D0F49 /* wechat_white@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B7AA88A1BDBF0F8000D0F49 /* wechat_white@2x.png */; };
 		8B7AA8AF1BDBF0F8000D0F49 /* wechat_white@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B7AA88B1BDBF0F8000D0F49 /* wechat_white@3x.png */; };
-		8B7AA8B41BDBF2ED000D0F49 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7AA8B31BDBF2ED000D0F49 /* LoginViewController.m */; };
+		8B7AA8B41BDBF2ED000D0F49 /* PersonalCentreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7AA8B31BDBF2ED000D0F49 /* PersonalCentreViewController.m */; };
 		8B7AA8B81BDBFB2B000D0F49 /* UIButton+MyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7AA8B71BDBFB2B000D0F49 /* UIButton+MyButton.m */; };
 		8B7AA8BE1BDC1766000D0F49 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7AA8BD1BDC1766000D0F49 /* DetailViewController.m */; };
 		8B7AA8C11BDC1A82000D0F49 /* DetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7AA8C01BDC1A82000D0F49 /* DetailTableViewCell.m */; };
@@ -348,8 +348,8 @@
 		8B7AA8891BDBF0F8000D0F49 /* wechat_normal@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechat_normal@3x.png"; sourceTree = "<group>"; };
 		8B7AA88A1BDBF0F8000D0F49 /* wechat_white@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechat_white@2x.png"; sourceTree = "<group>"; };
 		8B7AA88B1BDBF0F8000D0F49 /* wechat_white@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechat_white@3x.png"; sourceTree = "<group>"; };
-		8B7AA8B21BDBF2ED000D0F49 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		8B7AA8B31BDBF2ED000D0F49 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		8B7AA8B21BDBF2ED000D0F49 /* PersonalCentreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalCentreViewController.h; sourceTree = "<group>"; };
+		8B7AA8B31BDBF2ED000D0F49 /* PersonalCentreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalCentreViewController.m; sourceTree = "<group>"; };
 		8B7AA8B61BDBFB2B000D0F49 /* UIButton+MyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+MyButton.h"; sourceTree = "<group>"; };
 		8B7AA8B71BDBFB2B000D0F49 /* UIButton+MyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+MyButton.m"; sourceTree = "<group>"; };
 		8B7AA8BC1BDC1766000D0F49 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
@@ -488,6 +488,7 @@
 		B92C962A1CD73EA800541EB3 /* LeftMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuViewController.m; sourceTree = "<group>"; };
 		B92C962B1CD73EA800541EB3 /* MainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainNavigationController.h; sourceTree = "<group>"; };
 		B92C962C1CD73EA800541EB3 /* MainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainNavigationController.m; sourceTree = "<group>"; };
+		B92C962F1CD74A7300541EB3 /* DefaultSettingHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DefaultSettingHeader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -696,8 +697,8 @@
 			children = (
 				334F0C481C057D3400872C9C /* lib */,
 				8BC3676C1BE648EF0020E157 /* Artical */,
-				8B7AA82A1BDBE8C3000D0F49 /* AppDelegate */,
 				8B7AA82B1BDBE8C3000D0F49 /* Home */,
+				8B7AA82A1BDBE8C3000D0F49 /* AppDelegate */,
 			);
 			path = Section;
 			sourceTree = "<group>";
@@ -780,8 +781,8 @@
 			children = (
 				8B7AA82F1BDBE9E4000D0F49 /* HomePageViewController.h */,
 				8B7AA8301BDBE9E4000D0F49 /* HomePageViewController.m */,
-				8B7AA8B21BDBF2ED000D0F49 /* LoginViewController.h */,
-				8B7AA8B31BDBF2ED000D0F49 /* LoginViewController.m */,
+				8B7AA8B21BDBF2ED000D0F49 /* PersonalCentreViewController.h */,
+				8B7AA8B31BDBF2ED000D0F49 /* PersonalCentreViewController.m */,
 				8B7AA8BC1BDC1766000D0F49 /* DetailViewController.h */,
 				8B7AA8BD1BDC1766000D0F49 /* DetailViewController.m */,
 				8B7AA8C21BDC1F68000D0F49 /* MerchantViewController.h */,
@@ -799,6 +800,7 @@
 				8BDD93171BE9A496001C6599 /* NetworkHeader.h */,
 				8BDD93181BE9D2AA001C6599 /* ArticalHeader.h */,
 				8B6204C81BEC92F800943060 /* ColorHeader.h */,
+				B92C962F1CD74A7300541EB3 /* DefaultSettingHeader.h */,
 			);
 			path = Macro;
 			sourceTree = "<group>";
@@ -1311,7 +1313,7 @@
 				8B7AA8601BDBEE99000D0F49 /* SDWebImageManager.m in Sources */,
 				8BCBD4461BE8EC3F0091579B /* ArticalModel.m in Sources */,
 				8B7AA85E1BDBEE99000D0F49 /* SDWebImageDownloader.m in Sources */,
-				8B7AA8B41BDBF2ED000D0F49 /* LoginViewController.m in Sources */,
+				8B7AA8B41BDBF2ED000D0F49 /* PersonalCentreViewController.m in Sources */,
 				B92C962D1CD73EA800541EB3 /* LeftMenuViewController.m in Sources */,
 				8BC367751BE64C1A0020E157 /* ArticalListCell.m in Sources */,
 				8B7AA8C11BDC1A82000D0F49 /* DetailTableViewCell.m in Sources */,
@@ -1426,7 +1428,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ying wang (75M6QN62KB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ying wang (75M6QN62KB)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1448,7 +1451,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "5552633c-21f3-4571-a878-fd7e779f7421";
+				PROVISIONING_PROFILE = "4db54df6-418a-4e72-be1c-751bd3844db0";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1470,8 +1473,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Pinshe Information and Technology Co., Ltd. (A7CK3S9LM8)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Pinshe Information and Technology Co., Ltd. (A7CK3S9LM8)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: ying wang (E3VRBFN7UR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: ying wang (E3VRBFN7UR)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1486,7 +1489,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "5552633c-21f3-4571-a878-fd7e779f7421";
+				PROVISIONING_PROFILE = "88710685-a358-49d1-b0db-71c10287fd9b";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1497,8 +1500,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 798346437@qq.com (2LRTF9FBHF)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: ying wang (75M6QN62KB)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: ying wang (75M6QN62KB)";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/JieTu/PrefixHeader.pch";
@@ -1512,9 +1515,9 @@
 					"$(PROJECT_DIR)/JieTu/Section/lib",
 					"$(SRCROOT)/JieTu/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fanpengju.JieTu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fanpengju.JieTuTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9533c79e-7937-47ac-9f2f-f7fcd66e099a";
+				PROVISIONING_PROFILE = "4db54df6-418a-4e72-be1c-751bd3844db0";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/JieTu/lib";
 			};
 			name = Debug;
@@ -1524,8 +1527,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: 798346437@qq.com (2LRTF9FBHF)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: ying wang (E3VRBFN7UR)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: ying wang (E3VRBFN7UR)";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/JieTu/PrefixHeader.pch";
@@ -1539,9 +1542,9 @@
 					"$(PROJECT_DIR)/JieTu/Section/lib",
 					"$(SRCROOT)/JieTu/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fanpengju.JieTu;
+				PRODUCT_BUNDLE_IDENTIFIER = com.fanpengju.JieTuTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9533c79e-7937-47ac-9f2f-f7fcd66e099a";
+				PROVISIONING_PROFILE = "88710685-a358-49d1-b0db-71c10287fd9b";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/JieTu/lib";
 			};
 			name = Release;

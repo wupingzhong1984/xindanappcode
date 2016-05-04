@@ -11,7 +11,7 @@
 #import "ArticalInfoViewController.h"
 #import "MJRefresh.h"
 #import "ArticalModel.h"
-#import "LoginViewController.h"
+#import "PersonalCentreViewController.h"
 #import "MainNavigationController.h"
 
 @interface ArticalListViewController ()<UITableViewDataSource, UITableViewDelegate>
@@ -30,7 +30,7 @@
 }
 
 - (void)leftBarButtonItemAction{
-    LoginViewController * vc = [[LoginViewController alloc] init];
+    PersonalCentreViewController * vc = [[PersonalCentreViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -42,9 +42,9 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     UILabel * label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 60, 40)];
-    label.text = @"心单";
-    label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont systemFontOfSize:18];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = @"心单";
     self.navigationItem.titleView = label;
     //用户安装了微信，可以去登陆页面，没有安装，隐藏。
     //use menu instead of login
@@ -131,7 +131,7 @@
 
 
 - (void)creatTableView{
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame), K_UIScreenWidth, CGRectGetMinY(self.tabBarController.tabBar.frame)-CGRectGetMaxY(self.navigationController.navigationBar.frame)) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame), K_UIScreenWidth, K_UIScreenHeight-CGRectGetMaxY(self.navigationController.navigationBar.frame)) style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.rowHeight = K_UIScreenWidth*2/3+2;

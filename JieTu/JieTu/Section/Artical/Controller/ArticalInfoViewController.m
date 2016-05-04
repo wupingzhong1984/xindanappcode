@@ -13,7 +13,7 @@
 #import "ShareView.h"
 #import "ShopModel.h"
 #import "ShopKindModel.h"
-#import "LoginViewController.h"
+#import "PersonalCentreViewController.h"
 #import "UMSocial.h"
 #import "HomePageViewController.h"
 
@@ -518,7 +518,7 @@
 - (void)loginAnimation{
     [[DarkButton sharedManager] removeFromSuperview];
     [[MyAlertView sharedManager] removeFromSuperview];
-    LoginViewController * vc = [[LoginViewController alloc] init];
+    PersonalCentreViewController * vc = [[PersonalCentreViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

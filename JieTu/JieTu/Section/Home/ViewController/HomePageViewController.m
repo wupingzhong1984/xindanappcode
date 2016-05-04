@@ -7,7 +7,7 @@
 //
 
 #import "HomePageViewController.h"
-#import "LoginViewController.h"
+#import "PersonalCentreViewController.h"
 #import "SWTableViewCell.h"
 #import "DetailViewController.h"
 #import "ArticalListViewController.h"
@@ -61,7 +61,7 @@
 }
 
 - (void)leftBarButtonItemAction{
-    LoginViewController * vc = [[LoginViewController alloc] init];
+    PersonalCentreViewController * vc = [[PersonalCentreViewController alloc] init];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -315,12 +315,13 @@
 //        
 //    }
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu"
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:(MainNavigationController *)self.navigationController
-                                                                            action:@selector(showMenu)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                             initWithTitle:@"Menu"
+                                             style:UIBarButtonItemStylePlain
+                                             target:(MainNavigationController *)self.navigationController
+                                             action:@selector(showMenu)];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"add.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemAction)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"add.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemAction)];
     
     self.cancelShopKind = @"0";
     [self creatCollection];
@@ -378,7 +379,7 @@
     layout.minimumInteritemSpacing = 3;
     layout.minimumLineSpacing = 3;
     layout.itemSize = CGSizeMake((K_UIScreenWidth-3)/2.0, (K_UIScreenWidth-3)/2.0);
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame), K_UIScreenWidth, CGRectGetMinY(self.tabBarController.tabBar.frame)-CGRectGetMaxY(self.navigationController.navigationBar.frame)) collectionViewLayout:layout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.navigationController.navigationBar.frame), K_UIScreenWidth, K_UIScreenHeight-CGRectGetMaxY(self.navigationController.navigationBar.frame)) collectionViewLayout:layout];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
     _collectionView.bounces = YES;
@@ -404,7 +405,6 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
     DetailViewController * detailVC = [[DetailViewController alloc] init];
-    detailVC.titleString = [self.shopKindList objectAtIndex:indexPath.row];
     detailVC.shopKindModel = [self.shopKindList objectAtIndex:indexPath.row];
     detailVC.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailVC animated:YES];

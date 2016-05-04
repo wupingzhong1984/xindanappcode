@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 @class ShopKindModel;
 @interface DetailViewController : UIViewController
-@property(nonatomic, strong)NSString * titleString;
 @property(nonatomic, strong)ShopKindModel * shopKindModel;
 @end

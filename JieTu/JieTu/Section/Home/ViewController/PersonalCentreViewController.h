@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "HomePageViewController.h"
 
-@interface LoginViewController : UIViewController
+@interface PersonalCentreViewController : UIViewController
 
 @end

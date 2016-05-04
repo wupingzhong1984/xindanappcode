@@ -12,9 +12,10 @@
 #import "DetailTableViewCell.h"
 #import "ShopModel.h"
 #import "ShopKindModel.h"
-#import "LoginViewController.h"
+#import "PersonalCentreViewController.h"
 #import "ShopKindNoneView.h"
 #import "ArticalListViewController.h"
+#import "MainNavigationController.h"
 
 
 
@@ -45,8 +46,9 @@
 }
 - (void)toAdd{
     
-    self.tabBarController.selectedIndex = 0;
-    [self.navigationController popToRootViewControllerAnimated:NO];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateIndexPath" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSIndexPath indexPathForRow:0 inSection:0], @"indexpath", nil]];
+    ArticalListViewController *articalVC = [[ArticalListViewController alloc] init];
+    self.navigationController.viewControllers = @[articalVC];
 }
 
 -(NSMutableArray *)dataLeftArray{
@@ -77,7 +79,13 @@
     label.textAlignment = NSTextAlignmentCenter;
     label.font = [UIFont systemFontOfSize:18];
     self.navigationItem.titleView = label;
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemAction)];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemAction)];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                             initWithTitle:@"Menu"
+                                             style:UIBarButtonItemStylePlain
+                                             target:(MainNavigationController *)self.navigationController
+                                             action:@selector(showMenu)];
     self.leftOrRight = @"left";
     [self createTopButtons];
     [self createTableView];
@@ -275,7 +283,8 @@
         cell.delegate = self;
         
         cell.detailLeftImageView = [[UIImageView alloc] initWithFrame:CGRectMake(4, 4, 61.5, 61.5)];
-        cell.detailLeftImageView.backgroundColor = [UIColor orangeColor];
+ //       cell.detailLeftImageView.backgroundColor = [UIColor orangeColor];
+        cell.detailLeftImageView.backgroundColor = [UIColor grayColor];
         [cell.contentView addSubview:((SWTableViewCell *)cell).detailLeftImageView];
         
         cell.detailNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(((SWTableViewCell *)cell).detailLeftImageView.frame)+16, 16, K_UIScreenWidth-CGRectGetMaxX(((SWTableViewCell *)cell).detailLeftImageView.frame), 16)];
@@ -339,7 +348,7 @@
 - (void)loginAnimation{
     [[DarkButton sharedManager] removeFromSuperview];
     [[MyAlertView sharedManager] removeFromSuperview];
-    LoginViewController * vc = [[LoginViewController alloc] init];
+    PersonalCentreViewController * vc = [[PersonalCentreViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
     
 }
