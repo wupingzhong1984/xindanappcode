@@ -14,7 +14,7 @@
 #import "ShopKindModel.h"
 #import "DetailViewController.h"
 
-@interface LeftMenuViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface LeftMenuViewController () <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 
 //user view's subviews
 @property(nonatomic, strong)UIImageView * userFaceImgV;
@@ -63,10 +63,10 @@
         [view addSubview:_userFaceImgV];
         [view addSubview:_userNameLbl];
         
-//        UIButton *touchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//        touchBtn.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 184.0f);
-//        [touchBtn addTarget:self action:@selector(touchUserView) forControlEvents:UIControlEventTouchUpInside];
-//        [view addSubview:touchBtn];
+        UIButton *touchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        touchBtn.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 184.0f);
+        [touchBtn addTarget:self action:@selector(touchUserView) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:touchBtn];
         
         view;
     });
@@ -208,12 +208,25 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    UINavigationController *navigationController = (UINavigationController *)self.frostedViewController.contentViewController;
+    if (indexPath.section == 2 && ![WXApi isWXAppInstalled]) {
+    
+        [self.frostedViewController hideMenuViewController];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+                                                        message:@"您还未安装微信，请先安装。"
+                                                       delegate:self
+                                              cancelButtonTitle:@"取消"
+                                              otherButtonTitles:@"安装", nil];
+        [alert show];
+        return;
+        
+    }
+    
     if ([_selectedIndex isEqual:indexPath]) {
         [self.frostedViewController hideMenuViewController];
         return;
     }
     
+    UINavigationController *navigationController = (UINavigationController *)self.frostedViewController.contentViewController;
     if (indexPath.section == 0) { //artical
         
         ArticalListViewController *articalVC = [[ArticalListViewController alloc] init];
@@ -223,7 +236,7 @@
         
         PersonalCentreViewController *personVC = [[PersonalCentreViewController alloc] init];
         navigationController.viewControllers = @[personVC];
-        
+
     } else if (indexPath.section == 1) {
         
         ShopKindModel *kind = [self.shopKindList objectAtIndex:indexPath.row];
@@ -281,6 +294,14 @@
         cell.textLabel.text = [NSString stringWithFormat:@"#%@",titles[indexPath.row]];
     }
     return cell;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == 1) {
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/wei-xin/id414478124?mt=8"]];
+    }
 }
 
 @end

@@ -36,7 +36,7 @@
 
     [self getIntoHomePageController];
     [self.window makeKeyAndVisible];
-    [self initFirstComeIn];
+//    [self initFirstComeIn];
     
     [UMSocialData setAppKey:@"5630dfe267e58e25200005a7"];
     [UMSocialConfig hiddenNotInstallPlatforms:@[UMShareToQQ,UMShareToQzone,UMShareToWechatSession,UMShareToWechatTimeline]];
