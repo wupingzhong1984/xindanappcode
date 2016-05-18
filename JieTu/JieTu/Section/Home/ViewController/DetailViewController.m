@@ -82,7 +82,8 @@
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemAction)];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-                                             initWithTitle:@"Menu"
+                                             initWithImage:[[UIImage imageNamed:@"menu.png"]
+                                                            imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
                                              style:UIBarButtonItemStylePlain
                                              target:(MainNavigationController *)self.navigationController
                                              action:@selector(showMenu)];
@@ -348,8 +349,9 @@
 - (void)loginAnimation{
     [[DarkButton sharedManager] removeFromSuperview];
     [[MyAlertView sharedManager] removeFromSuperview];
-    PersonalCentreViewController * vc = [[PersonalCentreViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateIndexPath" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSIndexPath indexPathForRow:0 inSection:2], @"indexpath", nil]];
+    PersonalCentreViewController *vc = [[PersonalCentreViewController alloc] init];
+    self.navigationController.viewControllers = @[vc];
     
 }
 

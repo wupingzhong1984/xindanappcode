@@ -54,10 +54,12 @@
 //    }
     
     //menu bar
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Menu"
-                                                                             style:UIBarButtonItemStylePlain
-                                                                            target:(MainNavigationController *)self.navigationController
-                                                                            action:@selector(showMenu)];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
+                                             initWithImage:[[UIImage imageNamed:@"menu.png"]
+                                                            imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                                             style:UIBarButtonItemStylePlain
+                                             target:(MainNavigationController *)self.navigationController
+                                             action:@selector(showMenu)];
     self.pageNo = 1;
     [self creatTableView];
 }

@@ -21,6 +21,7 @@
 @property(nonatomic, strong)UILabel * userNameLbl;
 @property (nonatomic,strong) NSIndexPath *selectedIndex;
 @property (nonatomic,assign) BOOL didLogin;
+@property (nonatomic,strong) NSString *userId;
 @property(nonatomic, strong)NSMutableArray * shopKindList;
 @end
 
@@ -40,9 +41,9 @@
     self.tableView.opaque = NO;
     self.tableView.backgroundColor = [UIColor whiteColor];
     self.tableView.tableHeaderView = ({
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 189.0f)];
-        self.userFaceImgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 40, 100, 100)];
-        _userFaceImgV.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 189.0f)];
+        self.userFaceImgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+        [_userFaceImgV setCenter:CGPointMake(view.frame.size.width/2, 40+_userFaceImgV.frame.size.height/2)];
         _userFaceImgV.image = [UIImage imageNamed:@"photo.png"]; //wechat
         _userFaceImgV.layer.masksToBounds = YES;
         _userFaceImgV.layer.cornerRadius = 50.0;
@@ -52,19 +53,20 @@
         _userFaceImgV.layer.shouldRasterize = YES;
         _userFaceImgV.clipsToBounds = YES;
         
-        self.userNameLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 150, 0, 24)];
+        self.userNameLbl = [[UILabel alloc] initWithFrame:CGRectMake(20, 150, 160, 30)];
         _userNameLbl.text = @"游客";  //wechat
-        _userNameLbl.font = [UIFont fontWithName:@"HelveticaNeue" size:17];
+        _userNameLbl.font = [UIFont fontWithName:@"HelveticaNeue" size:16];
         _userNameLbl.backgroundColor = [UIColor whiteColor];
         _userNameLbl.textColor = UIColor_alert;
-        [_userNameLbl sizeToFit];
-        _userNameLbl.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+        _userNameLbl.textAlignment = NSTextAlignmentCenter;
+//        [_userNameLbl sizeToFit];
+//        _userNameLbl.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         
         [view addSubview:_userFaceImgV];
         [view addSubview:_userNameLbl];
         
         UIButton *touchBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        touchBtn.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 184.0f);
+        touchBtn.frame = CGRectMake(0, 0, 200, 184.0f);
         [touchBtn addTarget:self action:@selector(touchUserView) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:touchBtn];
         
@@ -82,12 +84,29 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
+    
+    if ([self userDidLogin] && _didLogin) {
+        
+        NSMutableDictionary * dic = [[NSUserDefaults standardUserDefaults] objectForKey:@"userInfoDic"];
+        NSString *curUserId = [dic objectForKey:@"userId"];
+        if (![curUserId isEqualToString:_userId]) {
+            NSString *userName = [dic objectForKey:@"userName"];
+            NSString *userIcon = [dic objectForKey:@"userIcon"];
+            if (userIcon.length > 0)
+                [self.userFaceImgV sd_setImageWithURL:[NSURL URLWithString:userIcon] placeholderImage:nil];
+            if (userName.length > 0)
+                self.userNameLbl.text = userName;
+            
+            self.userId = curUserId;
+        }
+    }
+    
     if ([self userDidLogin] && !_didLogin) {
         //update tableheaderview
         NSMutableDictionary * dic = [[NSUserDefaults standardUserDefaults] objectForKey:@"userInfoDic"];
         NSString *userName = [dic objectForKey:@"userName"];
         NSString *userIcon = [dic objectForKey:@"userIcon"];
-        
+        self.userId = [dic objectForKey:@"userId"];
         if (userIcon.length > 0)
             [self.userFaceImgV sd_setImageWithURL:[NSURL URLWithString:userIcon] placeholderImage:nil];
         if (userName.length > 0)
@@ -100,7 +119,7 @@
         //update tableheaderview
         self.userFaceImgV.image = [UIImage imageNamed:@"photo.png"];;
         self.userNameLbl.text = @"游客";
-        
+        self.userId = @"";
         _didLogin = NO;
     }
 }
@@ -132,40 +151,40 @@
     if (!_shopKindList) {
         self.shopKindList = [NSMutableArray arrayWithCapacity:1];
     }
-    
+    NSArray *shopKindNames = [NSArray arrayWithObjects:ShopKindNames];
     ShopKindModel *coffee = [[ShopKindModel alloc] init];
     coffee.shopKindId = @"COFFEE";
-    coffee.shopKindName = @"咖啡";
+    coffee.shopKindName = shopKindNames[0];
     coffee.img = @"coffee.png";
     [_shopKindList addObject:coffee];
     
     ShopKindModel *japan = [[ShopKindModel alloc] init];
     japan.shopKindId = @"JAPAN";
-    japan.shopKindName = @"日料";
+    japan.shopKindName = shopKindNames[1];
     japan.img = @"japanse.png";
     [_shopKindList addObject:japan];
     
     ShopKindModel *night = [[ShopKindModel alloc] init];
     night.shopKindId = @"NIGHT";
-    night.shopKindName = @"夜生活";
+    night.shopKindName = shopKindNames[2];
     night.img = @"nightLift.png";
     [_shopKindList addObject:night];
     
     ShopKindModel *chinese = [[ShopKindModel alloc] init];
     chinese.shopKindId = @"CHINESE";
-    chinese.shopKindName = @"中餐";
+    chinese.shopKindName = shopKindNames[3];
     chinese.img = @"middleFood.png";
     [_shopKindList addObject:chinese];
     
     ShopKindModel *brunch = [[ShopKindModel alloc] init];
     brunch.shopKindId = @"BRUNCH";
-    brunch.shopKindName = @"早午餐";
+    brunch.shopKindName = shopKindNames[4];
     brunch.img = @"lunch.png";
     [_shopKindList addObject:brunch];
     
     ShopKindModel *western = [[ShopKindModel alloc] init];
     western.shopKindId = @"WESTERN";
-    western.shopKindName = @"西餐";
+    western.shopKindName = shopKindNames[5];
     western.img = @"westFood.png";
     [_shopKindList addObject:western];
 }

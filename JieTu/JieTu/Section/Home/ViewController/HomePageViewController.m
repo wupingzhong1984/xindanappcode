@@ -60,11 +60,6 @@
     self.alphaView.center = self.alphaButton.center;
 }
 
-- (void)leftBarButtonItemAction{
-    PersonalCentreViewController * vc = [[PersonalCentreViewController alloc] init];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
-}
 - (void)rightBarButtonItemAction{
     
     if (![CherryHelper checkUserLoginOrNot]) {
@@ -316,7 +311,8 @@
 //    }
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]
-                                             initWithTitle:@"Menu"
+                                             initWithImage:[[UIImage imageNamed:@"menu.png"]
+                                                            imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
                                              style:UIBarButtonItemStylePlain
                                              target:(MainNavigationController *)self.navigationController
                                              action:@selector(showMenu)];
@@ -839,7 +835,9 @@
 - (void)loginAnimation{
     [[DarkButton sharedManager] removeFromSuperview];
     [[MyAlertView sharedManager] removeFromSuperview];
-    [self leftBarButtonItemAction];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateIndexPath" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSIndexPath indexPathForRow:0 inSection:2], @"indexpath", nil]];
+    PersonalCentreViewController *vc = [[PersonalCentreViewController alloc] init];
+    self.navigationController.viewControllers = @[vc];
 }
 
 //- (void)swippableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {

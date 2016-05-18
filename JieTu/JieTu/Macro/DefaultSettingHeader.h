@@ -13,4 +13,4 @@
 #endif /* DefaultSettingHeader_h */
 
 
-#define ShopKindNames @"咖啡", @"日料", @"夜生活", @"中餐", @"早午餐", @"西餐", nil
+#define ShopKindNames @"咖啡甜点", @"日韩料理", @"夜生活", @"中餐", @"早午餐", @"西餐", nil

@@ -32,7 +32,7 @@
 @property(nonatomic, strong)UITableView * tableView;
 @property(nonatomic, strong)ShopModel * collecShopModel;
 @property(nonatomic, strong)UIActivityIndicatorView * activity;
-@property(nonatomic, strong)UIButton * recommendBtn2;
+@property(nonatomic, strong)UIImageView * recommendBtn2;
 @end
 
 @implementation ArticalInfoViewController
@@ -370,13 +370,17 @@
     [recommendBtn addTarget:self action:@selector(recommendBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:recommendBtn];
     
-    self.recommendBtn2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.recommendBtn2 = [[UIImageView alloc] initWithFrame:CGRectZero];
     _recommendBtn2.frame = CGRectMake( K_UIScreenWidth -45, 14, 21, 16);
     _recommendBtn2.backgroundColor = [UIColor clearColor];
     UIImage * image = [UIImage imageNamed:@"moreShop.png"];
-    [_recommendBtn2 setBackgroundImage:image forState:UIControlStateNormal];
-    [_recommendBtn2 addTarget:self action:@selector(recommendBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [_recommendBtn2 setImage:image];
     [view addSubview:_recommendBtn2];
+    
+    UIButton *recommendBtnTouch = [UIButton buttonWithType:UIButtonTypeCustom];
+    recommendBtnTouch.frame = CGRectMake(K_UIScreenWidth -58, 0, 44, 44);
+    [recommendBtnTouch addTarget:self action:@selector(recommendBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:recommendBtnTouch];
 }
 
 - (void)recommendBtnAction{
@@ -392,7 +396,7 @@
             self.tableView.frame = CGRectMake(0, CGRectGetMaxY(self.view.frame)-44, K_UIScreenWidth, 0);
             self.BottomView.frame = CGRectMake(0, CGRectGetMaxY(self.view.frame)-44, K_UIScreenWidth, 0);
             UIImage * image = [UIImage imageNamed:@"moreShop.png"];
-            [_recommendBtn2 setBackgroundImage:image forState:UIControlStateNormal];
+            [_recommendBtn2 setImage:image];
         } completion:^(BOOL finished) {
             
         }];
@@ -403,7 +407,7 @@
         self.tableView.frame = CGRectMake(0, CGRectGetMaxY(self.view.frame)-44-200 , K_UIScreenWidth, 200);
         self.BottomView.frame = CGRectMake(0, CGRectGetMaxY(self.view.frame)-44-200, K_UIScreenWidth, 200);
         UIImage * image = [UIImage imageNamed:@"cancle.png"];
-        [_recommendBtn2 setBackgroundImage:image forState:UIControlStateNormal];
+        [_recommendBtn2 setImage:image];
         
     } completion:^(BOOL finished) {
         
@@ -490,7 +494,7 @@
     [_tableView registerClass:[ArticalCell class] forCellReuseIdentifier:@"articalCell"];
     [self.view addSubview:_tableView];
     UIImage * image = [UIImage imageNamed:@"cancle.png"];
-    [_recommendBtn2 setBackgroundImage:image forState:UIControlStateNormal];
+    [_recommendBtn2 setImage:image];
 
     
 }
@@ -518,8 +522,9 @@
 - (void)loginAnimation{
     [[DarkButton sharedManager] removeFromSuperview];
     [[MyAlertView sharedManager] removeFromSuperview];
-    PersonalCentreViewController * vc = [[PersonalCentreViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"updateIndexPath" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSIndexPath indexPathForRow:0 inSection:2], @"indexpath", nil]];
+    PersonalCentreViewController *vc = [[PersonalCentreViewController alloc] init];
+    self.navigationController.viewControllers = @[vc];
 }
 
 - (void)cellCollectButtonAction:(UIButton *)btn{

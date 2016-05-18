@@ -366,7 +366,7 @@ static char kAFImageRequestOperationObjectKey;
     NSURL *url = [NSURL URLWithString:SERVER_URL];
     if (!_httpClient)
         _httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-    
+    NSLog(@"%@,%@,%@",url,urlString,parameters);
     [_httpClient postPath:urlString parameters:parameters
                 success:^(AFHTTPRequestOperation *operation, id responseObject)
                 {
@@ -440,6 +440,7 @@ static char kAFImageRequestOperationObjectKey;
     _httpPostClient.parameterEncoding = AFJSONParameterEncoding;
     [_httpPostClient setDefaultHeader:@"Accept" value:@"text/json"];
     // httpClient 的postPath就是上文中的pathStr，即你要访问的URL地址，这里是向服务器提交一个数据请求，
+    NSLog(@"\n%@\n%@\n%@",_httpPostClient,urlString,parameters);
     [_httpPostClient postPath:urlString parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
      
      {

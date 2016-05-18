@@ -177,6 +177,8 @@
 		8BF5DE941BF59B0800533735 /* more_click@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF5DE921BF59B0800533735 /* more_click@3x.png */; };
 		8BF5DE971BF59B1200533735 /* share_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF5DE951BF59B1200533735 /* share_click@2x.png */; };
 		8BF5DE981BF59B1200533735 /* share_click@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BF5DE961BF59B1200533735 /* share_click@3x.png */; };
+		B900431A1CE3A3BC005C95FA /* menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B90043181CE3A3BC005C95FA /* menu@2x.png */; };
+		B900431B1CE3A3BC005C95FA /* menu@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B90043191CE3A3BC005C95FA /* menu@3x.png */; };
 		B92C95FB1CD61D5C00541EB3 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B92C95FA1CD61D5C00541EB3 /* libz.tbd */; };
 		B92C95FD1CD61D6F00541EB3 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B92C95FC1CD61D6F00541EB3 /* libstdc++.tbd */; };
 		B92C95FF1CD61D7E00541EB3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B92C95FE1CD61D7E00541EB3 /* libsqlite3.tbd */; };
@@ -468,6 +470,8 @@
 		8BF5DE921BF59B0800533735 /* more_click@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more_click@3x.png"; sourceTree = "<group>"; };
 		8BF5DE951BF59B1200533735 /* share_click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_click@2x.png"; sourceTree = "<group>"; };
 		8BF5DE961BF59B1200533735 /* share_click@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share_click@3x.png"; sourceTree = "<group>"; };
+		B90043181CE3A3BC005C95FA /* menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@2x.png"; sourceTree = "<group>"; };
+		B90043191CE3A3BC005C95FA /* menu@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@3x.png"; sourceTree = "<group>"; };
 		B92C95FA1CD61D5C00541EB3 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		B92C95FC1CD61D6F00541EB3 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		B92C95FE1CD61D7E00541EB3 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -848,6 +852,8 @@
 		8B7AA8691BDBF0F8000D0F49 /* AppIcons */ = {
 			isa = PBXGroup;
 			children = (
+				B90043181CE3A3BC005C95FA /* menu@2x.png */,
+				B90043191CE3A3BC005C95FA /* menu@3x.png */,
 				8B12ED551BF9B8E200CC0FFE /* shopkindNone.png */,
 				8B7AA86A1BDBF0F8000D0F49 /* about@2x.png */,
 				8B7AA86B1BDBF0F8000D0F49 /* about@3x.png */,
@@ -1162,7 +1168,12 @@
 				TargetAttributes = {
 					8B7AA8021BDBE727000D0F49 = {
 						CreatedOnToolsVersion = 6.3.2;
-						DevelopmentTeam = JEP7794WY8;
+						DevelopmentTeam = A7CK3S9LM8;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 					8B7AA8151BDBE727000D0F49 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -1262,6 +1273,7 @@
 				8BD64C0F1BE1195000FDDD8F /* UMSCommentInputControlleriPad.xib in Resources */,
 				8B7AA8CD1BDCA742000D0F49 /* b27_icon_star_gray@2x.png in Resources */,
 				8B0805D61BF386650087E3F4 /* star_gary@3x.png in Resources */,
+				B900431A1CE3A3BC005C95FA /* menu@2x.png in Resources */,
 				8B7AA8CE1BDCA742000D0F49 /* b27_icon_star_yellow@2x.png in Resources */,
 				8B7AA8951BDBF0F8000D0F49 /* address_line@3x.png in Resources */,
 				313B6F271C6EE6F70045CA38 /* 002.png in Resources */,
@@ -1280,6 +1292,7 @@
 				8BF5DE8E1BF5926600533735 /* 111@3x.png in Resources */,
 				8B12ED531BF9B8AF00CC0FFE /* wechat_share@2x.png in Resources */,
 				8B7AA80E1BDBE727000D0F49 /* Images.xcassets in Resources */,
+				B900431B1CE3A3BC005C95FA /* menu@3x.png in Resources */,
 				31CF209D1C57B68F000958A6 /* 01.png in Resources */,
 				8BD64C121BE1195000FDDD8F /* UMSLoginViewController.xib in Resources */,
 				8BEE04F51BF1C0EC00F3469D /* JieTuShare.png in Resources */,
@@ -1473,8 +1486,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: ying wang (E3VRBFN7UR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: ying wang (E3VRBFN7UR)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Pinshe Information and Technology Co., Ltd. (A7CK3S9LM8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Pinshe Information and Technology Co., Ltd. (A7CK3S9LM8)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1489,7 +1502,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "88710685-a358-49d1-b0db-71c10287fd9b";
+				PROVISIONING_PROFILE = "e226add7-749a-45f8-a24f-837b99cca04c";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1515,7 +1528,7 @@
 					"$(PROJECT_DIR)/JieTu/Section/lib",
 					"$(SRCROOT)/JieTu/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fanpengju.JieTuTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pinshe.JieTuApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "4db54df6-418a-4e72-be1c-751bd3844db0";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/JieTu/lib";
@@ -1527,8 +1540,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: ying wang (E3VRBFN7UR)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: ying wang (E3VRBFN7UR)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Shanghai Pinshe Information and Technology Co., Ltd. (A7CK3S9LM8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Shanghai Pinshe Information and Technology Co., Ltd. (A7CK3S9LM8)";
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/JieTu/PrefixHeader.pch";
@@ -1542,9 +1555,9 @@
 					"$(PROJECT_DIR)/JieTu/Section/lib",
 					"$(SRCROOT)/JieTu/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.fanpengju.JieTuTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pinshe.JieTuApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "88710685-a358-49d1-b0db-71c10287fd9b";
+				PROVISIONING_PROFILE = "e226add7-749a-45f8-a24f-837b99cca04c";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/JieTu/lib";
 			};
 			name = Release;
